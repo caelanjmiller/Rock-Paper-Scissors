@@ -1,0 +1,44 @@
+* {
+    box-sizing: border-box;
+    font-family: 'DynaPuff';
+}
+
+body,html {
+    margin: 0;
+    padding: 0;
+}
+
+.scoreboard {
+    border: 5px solid black;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn img {
+    width: 10rem;
+}
+
+.btn {
+    border: .4rem solid black;
+    border-radius: .5rem;
+    margin: 1rem;
+    font-size: 1.5rem;
+    padding: 1rem .5rem;
+    transition: all .5s;
+    text-align: center;
+    color: white;
+}
+  
+.btn:hover {
+    transform: scale(1.1);
+    border-color: #ffc600;
+    box-shadow: 0 0 1rem #ffc600;
+  }
+
+footer {
+    background-color: #000000;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

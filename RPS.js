@@ -1,7 +1,7 @@
 // Simple Rock Paper Scissors Game 
 
 const choices = ['rock','paper', 'scissors'];
-let rounds = parseInt(prompt('How many rounds of Rock, Paper, Scissors do you want to play?'));
+//let rounds = parseInt(prompt('How many rounds of Rock, Paper, Scissors do you want to play?'));
 
 function getCpuChoice () {
     let cpuChoice = choices[Math.floor(Math.random() * 3)]; // Random index from 0-2 [choices] to select CPU's move
@@ -76,5 +76,15 @@ function rpsGame (rounds) {
     }
 }
 
-rpsGame(rounds);
+function playerButtonSelection () {
+  playerButtonChoice = this.id.toLowerCase(); // this refers to DOM object (in this case button), allowing me call .id method and get id of said button
+  console.log(playerButtonChoice);
+}
+
+const btns = document.querySelectorAll(".btn");
+btns.forEach(btn => btn.addEventListener('click',playerButtonSelection));
+
+
+
+
 // Caelan Miller - 2022
