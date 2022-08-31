@@ -9,31 +9,69 @@ body,html {
 }
 
 .scoreboard {
-    border: 5px solid black;
+    border: .4rem solid black;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
-.btn img {
-    width: 10rem;
+.title {
+    display:flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.btn {
+.title-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.7rem;
+}
+
+.pbtn img, .cpu-btn img {
+    width: 6rem;
+}
+
+.pbtn, .cpu-btn{
     border: .4rem solid black;
     border-radius: .5rem;
     margin: 1rem;
-    font-size: 1.5rem;
     padding: 1rem .5rem;
     transition: all .5s;
     text-align: center;
     color: white;
 }
-  
-.btn:hover {
+
+.cpu-selection {
     transform: scale(1.1);
-    border-color: #ffc600;
-    box-shadow: 0 0 1rem #ffc600;
-  }
+    border-color: #ff7eb6;
+    box-shadow: 0 0 .75rem #ff7eb6;
+}
+  
+.pbtn:hover {
+    transform: scale(1.1);
+    border-color: #3ddbd9;
+    box-shadow: 0 0 .75rem #3ddbd9;
+}
+
+.player, .cpu {
+    padding: .5rem;
+    font-size: 1.2rem;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.battle-ground {
+    border: solid .4rem black;
+    display: flex;
+    justify-content: space-between;
+}
 
 footer {
     background-color: #000000;
@@ -41,4 +79,5 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: .75rem;
 }
