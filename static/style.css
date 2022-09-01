@@ -67,6 +67,11 @@ body,html {
     text-align: center;
 }
 
+.announcement:hover {
+    transform: scale(1.1);
+    color: #FFD700;
+}
+
 .battle-ground {
     border: solid .4rem black;
     display: flex;

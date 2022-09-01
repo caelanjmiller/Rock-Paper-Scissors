@@ -132,6 +132,10 @@ function cpuButtonHighlightRemoval(cpuBtn){
 }
 
 const announcementBanner = document.querySelector('.announcement');
+announcementBanner.addEventListener('click', restartGameCycle);
+function restartGameCycle () {
+    location.reload();
+}
 function changeBannerText(winnerOfRound) {
     console.log('The function changeBannerText() is now running....');
     if (playerScore < 5 && cpuScore < 5) {
@@ -139,16 +143,11 @@ function changeBannerText(winnerOfRound) {
         announcementBanner.innerHTML = bannerText;
     }
     else if (playerScore >= 5 && cpuScore < 5) {
-        announcementBanner.innerHTML = 'You are the Grand Winner!';
-        playerScore = 0; // Resets global scorekeeping so that the grand announcement will be done every 5 wins
-        cpuScore = 0;
+        announcementBanner.innerHTML = 'You are the Grand Winner!\nClick to Refresh';
     }
     else if (cpuScore >= 5 && playerScore < 5) {
-        announcementBanner.innerHTML = 'The CPU is the Grand Winner....'
-        cpuScore = 0;
-        playerScore = 0;
+        announcementBanner.innerHTML = 'The CPU is the Grand Winner....\nClick to Refresh'
     }
-
 }
 
 var playerScore = 0;
