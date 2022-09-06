@@ -29,22 +29,21 @@ function rockChoice () {
         winnerOfRound = 'Draw, there is no winner';
         console.log(winnerOfRound);
         cpuButtonHighlight(cpuRock);
-        playerCPUDraw(playerScore, cpuScore); 
-        return changeBannerText(winnerOfRound);
+        changeBannerText(winnerOfRound);
     }
     else if (playerChoice == 'rock' && cpuChoice === 'paper') {
         winnerOfRound = 'You lose! Paper beats rock!';
         console.log(winnerOfRound);
         cpuButtonHighlight(cpuPaper);
-        cpuIncrementScore(cpuScore, cpuScoreElement);
-        return changeBannerText(winnerOfRound);
+        cpuIncrementScore();
+        changeBannerText(winnerOfRound);
     }
     else if (playerChoice == 'rock' && cpuChoice === 'scissors') {
         winnerOfRound = 'You win! Rock beats scissors!';
         console.log(winnerOfRound);
         cpuButtonHighlight(cpuScissors);
-        playerIncrementScore(playerScore, playerScoreElement);
-        return changeBannerText(winnerOfRound);
+        playerIncrementScore();
+        changeBannerText(winnerOfRound);
     }
     return winnerOfRound;
 }
@@ -63,22 +62,21 @@ function playRoundPaperChoice () {
         winnerOfRound = 'Draw, there is no winner';
         console.log(winnerOfRound);
         cpuButtonHighlight(cpuPaper);
-        playerCPUDraw(playerScore, cpuScore);
-        return changeBannerText(winnerOfRound);
+        changeBannerText(winnerOfRound);
     }
     else if (playerChoice == 'paper' && cpuChoice === 'rock'){
         winnerOfRound = 'You win! Paper beats rock!';
         console.log(winnerOfRound);
         cpuButtonHighlight(cpuRock);
-        playerIncrementScore(playerScore, playerScoreElement);
-        return changeBannerText(winnerOfRound);
+        playerIncrementScore();
+        changeBannerText(winnerOfRound);
     }
     else if (playerChoice == 'paper' && cpuChoice === 'scissors') {
         winnerOfRound = 'You lose! Scissors beats paper!';
         console.log(winnerOfRound);
         cpuButtonHighlight(cpuScissors);
-        cpuIncrementScore(cpuScore, cpuScoreElement);
-        return changeBannerText(winnerOfRound);
+        cpuIncrementScore();
+        changeBannerText(winnerOfRound);
     }
     return winnerOfRound;
 }
@@ -97,22 +95,21 @@ function playRoundScissorsChoice() {
         winnerOfRound = 'Draw, there is no winner';
         console.log(winnerOfRound);
         cpuButtonHighlight(cpuScissors);
-        playerCPUDraw(playerScore, cpuScore);
-        return changeBannerText(winnerOfRound);
+        changeBannerText(winnerOfRound);
     }
     else if (playerChoice == 'scissors' && cpuChoice === 'rock') {
         winnerOfRound = 'You lose! Rock beats scissors!';
         console.log(winnerOfRound);
         cpuButtonHighlight(cpuRock);
-        cpuIncrementScore(cpuScore, cpuScoreElement);
-        return changeBannerText(winnerOfRound);
+        cpuIncrementScore();
+        changeBannerText(winnerOfRound);
     }
     else if (playerChoice == 'scissors' && cpuChoice === 'paper') {
         winnerOfRound = 'You win! Scissors beats paper!';
         console.log(winnerOfRound);
         cpuButtonHighlight(cpuPaper);
-        playerIncrementScore(playerScore, playerScoreElement);
-        return changeBannerText(winnerOfRound);
+        playerIncrementScore();
+        changeBannerText(winnerOfRound);
     }
     return winnerOfRound;
 }
@@ -154,19 +151,15 @@ var playerScore = 0;
 var cpuScore = 0;
 const playerScoreElement = document.querySelector('#player-score');
 const cpuScoreElement = document.querySelector('#cpu-score');
-function playerIncrementScore (score, scoreElement) {    
+function playerIncrementScore () {    
     console.log('The function playerIncrementScore() is now running....');
     playerScore++;
     playerScoreElement.innerHTML = `Score: ${playerScore}`;
 }
-function cpuIncrementScore (score, scoreElement) {
+function cpuIncrementScore () {
     console.log('The function cpuIncrementScore() is now running....');
     cpuScore++;
     cpuScoreElement.innerHTML = `Score: ${cpuScore}`;
-}
-function playerCPUDraw(playerScore, cpuScore) {
-    cpuScore += 0;
-    playerScore += 0;
 }
 // Legacy Code base
 // const pbtns = document.querySelectorAll('.pbtn');
