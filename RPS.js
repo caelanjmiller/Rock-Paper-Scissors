@@ -45,7 +45,6 @@ function rockChoice () {
         playerIncrementScore();
         changeBannerText(winnerOfRound);
     }
-    return winnerOfRound;
 }
 
 const paperBtn = document.getElementById('paper');
@@ -78,7 +77,6 @@ function playRoundPaperChoice () {
         cpuIncrementScore();
         changeBannerText(winnerOfRound);
     }
-    return winnerOfRound;
 }
 
 const scissorsBtn = document.getElementById('scissors');
@@ -111,7 +109,6 @@ function playRoundScissorsChoice() {
         playerIncrementScore();
         changeBannerText(winnerOfRound);
     }
-    return winnerOfRound;
 }
 
 const cpuScissors = document.querySelector('#cpu-scissors');
