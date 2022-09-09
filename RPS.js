@@ -15,114 +15,78 @@ function getCpuChoice () {
     return cpuChoice;
 }
 
-const rockBtn = document.getElementById('rock');
-rockBtn.addEventListener('click', rockChoice);
-function rockChoice () {
-    console.log('The function rockChoice() is running....');
-    cpuButtonHighlightRemoval(cpuRock);
-    cpuButtonHighlightRemoval(cpuPaper);
-    cpuButtonHighlightRemoval(cpuScissors);
-    let winnerOfRound = '';
-    let cpuChoice = getCpuChoice();
-    let playerChoice = 'rock';
-    if (playerChoice === cpuChoice) {
-        winnerOfRound = 'Draw, there is no winner';
-        console.log(winnerOfRound);
-        cpuButtonHighlight(cpuRock);
-        changeBannerText(winnerOfRound);
+
+// 0 == tie, 1 == victory, -1 == loss
+const resultMatrix = [
+                                // CPU
+                        // rock, paper, scissors
+    /*Player   rock     */[ 0,     -1,      1],
+    /*         paper    */[ 1,      0,     -1],
+    /*         scissors */[-1,      1,      0]
+
+]
+
+function determineResult(player, cpu) {
+    // rock = 0, paper = 1, scissors = 2
+    const choice = {
+        "rock": 0,
+        "paper": 1,
+        "scissors": 2
     }
-    else if (playerChoice == 'rock' && cpuChoice === 'paper') {
-        winnerOfRound = 'You lose! Paper beats rock!';
-        console.log(winnerOfRound);
-        cpuButtonHighlight(cpuPaper);
-        cpuIncrementScore();
-        changeBannerText(winnerOfRound);
-    }
-    else if (playerChoice == 'rock' && cpuChoice === 'scissors') {
-        winnerOfRound = 'You win! Rock beats scissors!';
-        console.log(winnerOfRound);
-        cpuButtonHighlight(cpuScissors);
-        playerIncrementScore();
-        changeBannerText(winnerOfRound);
-    }
+    const playerVal= choice[player]
+    const cpuVal = choice[cpu]
+    return resultMatrix[playerVal][cpuVal]
 }
+
+function playRound(event) {
+    // remove existing and get new choice
+    cpuButtonHighlightRemoval();
+    let cpuChoice = getCpuChoice();
+    cpuButtonHighlight(cpuChoice);
+
+    let playerChoice = event.currentTarget.value;
+
+    // get result and print banner
+    const result = determineResult(playerChoice, cpuChoice);
+    if (result === 0) {
+        bannerText = 'Draw, there is no winner';
+    } else if (result === 1) {
+        bannerText = `You win! ${playerChoice} beats ${cpuChoice}`;
+        playerIncrementScore();
+    } else {
+        bannerText = `You lose! ${cpuChoice} beats ${playerChoice}`;
+        cpuIncrementScore();
+    }
+    changeBannerText(bannerText);
+}
+
+const rockBtn = document.getElementById('rock');
+rockBtn.addEventListener('click', playRound);
 
 const paperBtn = document.getElementById('paper');
-paperBtn.addEventListener('click', playRoundPaperChoice);
-function playRoundPaperChoice () {
-    console.log('The function paperChoice() is running....');
-    cpuButtonHighlightRemoval(cpuRock);
-    cpuButtonHighlightRemoval(cpuPaper);
-    cpuButtonHighlightRemoval(cpuScissors);
-    let winnerOfRound = '';
-    let cpuChoice = getCpuChoice();
-    let playerChoice = 'paper';
-    if (playerChoice === cpuChoice) {
-        winnerOfRound = 'Draw, there is no winner';
-        console.log(winnerOfRound);
-        cpuButtonHighlight(cpuPaper);
-        changeBannerText(winnerOfRound);
-    }
-    else if (playerChoice == 'paper' && cpuChoice === 'rock'){
-        winnerOfRound = 'You win! Paper beats rock!';
-        console.log(winnerOfRound);
-        cpuButtonHighlight(cpuRock);
-        playerIncrementScore();
-        changeBannerText(winnerOfRound);
-    }
-    else if (playerChoice == 'paper' && cpuChoice === 'scissors') {
-        winnerOfRound = 'You lose! Scissors beats paper!';
-        console.log(winnerOfRound);
-        cpuButtonHighlight(cpuScissors);
-        cpuIncrementScore();
-        changeBannerText(winnerOfRound);
-    }
-}
+paperBtn.addEventListener('click', playRound);
 
 const scissorsBtn = document.getElementById('scissors');
-scissorsBtn.addEventListener('click', playRoundScissorsChoice);
-function playRoundScissorsChoice() {
-    console.log('The function paperChoice() is running....');
-    cpuButtonHighlightRemoval(cpuRock);
-    cpuButtonHighlightRemoval(cpuPaper);
-    cpuButtonHighlightRemoval(cpuScissors);
-    let winnerOfRound = '';
-    let cpuChoice = getCpuChoice();
-    let playerChoice = 'scissors';
-    if (playerChoice === cpuChoice) {
-        winnerOfRound = 'Draw, there is no winner';
-        console.log(winnerOfRound);
-        cpuButtonHighlight(cpuScissors);
-        changeBannerText(winnerOfRound);
-    }
-    else if (playerChoice == 'scissors' && cpuChoice === 'rock') {
-        winnerOfRound = 'You lose! Rock beats scissors!';
-        console.log(winnerOfRound);
-        cpuButtonHighlight(cpuRock);
-        cpuIncrementScore();
-        changeBannerText(winnerOfRound);
-    }
-    else if (playerChoice == 'scissors' && cpuChoice === 'paper') {
-        winnerOfRound = 'You win! Scissors beats paper!';
-        console.log(winnerOfRound);
-        cpuButtonHighlight(cpuPaper);
-        playerIncrementScore();
-        changeBannerText(winnerOfRound);
-    }
-}
+scissorsBtn.addEventListener('click', playRound);
 
 const cpuScissors = document.querySelector('#cpu-scissors');
 const cpuPaper = document.querySelector('#cpu-paper');
 const cpuRock = document.querySelector('#cpu-rock');
-function cpuButtonHighlight(cpuBtn) { 
+function cpuButtonHighlight(cpuChoice) { 
     console.log('The function cpuButtonHighlight() is now running....');
-    let cpuSelection = cpuBtn;
-    cpuSelection.classList.add('cpu-selection');
+    if (cpuChoice === "rock") {
+        cpuRock.classList.add('cpu-selection');
+    } else if (cpuChoice === "paper") {
+        cpuPaper.classList.add('cpu-selection');
+    } else {
+        cpuScissors.classList.add('cpu-selection');
+    }
 }
-function cpuButtonHighlightRemoval(cpuBtn){
+function cpuButtonHighlightRemoval(cpuChoice){
     console.log('The function cpuButtonHighLightRemoval() is now running');
-    let cpuSelection = cpuBtn;
-    cpuSelection.classList.remove('cpu-selection');
+    cpuRock.classList.remove('cpu-selection');
+    cpuPaper.classList.remove('cpu-selection');
+    cpuScissors.classList.remove('cpu-selection');
 }
 
 const announcementBanner = document.querySelector('.announcement');
@@ -130,6 +94,7 @@ announcementBanner.addEventListener('click', restartGameCycle);
 function restartGameCycle () {
     location.reload();
 }
+
 function changeBannerText(winnerOfRound) {
     console.log('The function changeBannerText() is now running....');
     if (playerScore < 5 && cpuScore < 5) {
@@ -148,12 +113,12 @@ var playerScore = 0;
 var cpuScore = 0;
 const playerScoreElement = document.querySelector('#player-score');
 const cpuScoreElement = document.querySelector('#cpu-score');
-function playerIncrementScore () {    
+function playerIncrementScore() {    
     console.log('The function playerIncrementScore() is now running....');
     playerScore++;
     playerScoreElement.innerHTML = `Score: ${playerScore}`;
 }
-function cpuIncrementScore () {
+function cpuIncrementScore() {
     console.log('The function cpuIncrementScore() is now running....');
     cpuScore++;
     cpuScoreElement.innerHTML = `Score: ${cpuScore}`;
